@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="/logout">Log Out</a>
+    <form action="/trips/new" method="POST">
+      {% csrf_token %}
+      <button>Create a New Trip!</button>
+    </form>
+    <h1>Hello {{first_name}}!</h1>
+    <br />
+    <h3>Your Trips:</h3>
+    <table>
+      <thead>
+        <th>Destination</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Plan</th>
+        <th>Actions</th>
+      </thead>
+      {% for trip in user_all_trips %}
+      <tr>
+        <td><a href="/trips/{{trip.id}}">{{trip.destination}}</a></td>
+        <td>{{trip.start_date}}</td>
+        <td>{{trip.end_date}}</td>
+        <td>{{trip.plan}}</td>
+        <td>
+          {% if trip is user_creator %}
+          <a href="/remove/{{trip.id}}">Remove</a> &#124;
+          <a href="/trips/edit/{{trip.id}}">Edit</a>
+          {% else %}
+          <a href="/cancel/{{trip.id}}">Cancel</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <br />
+    <h3>Other People's Trips:</h3>
+    <table>
+      <thead>
+        <th>Destination</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Plan</th>
+        <th>Actions</th>
+      </thead>
+      {% for trip in all_trips_without_user %}
+      <tr>
+        <td><a href="/trips/{{trip.id}}">{{trip.destination}}</a></td>
+        <td>{{trip.start_date}}</td>
+        <td>{{trip.end_date}}</td>
+        <td>{{trip.plan}}</td>
+        <td>
+          <a href="/trips/join/{{trip.id}}">Join</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Trip</title>
+  </head>
+  <body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="/logout">Log Out</a>
+    <h1>Hello {{first_name}}! Create a trip!</h1>
+    <br />
+    <br />
+    <form action="/createtrip" method="POST">
+      {% csrf_token %}
+      <label for="destination">Destination:</label>
+      <input type="text" name="destination" /><br /><br />
+      <label for="start_date">Start Date:</label>
+      <input type="date" name="start_date" /><br /><br />
+      <label for="end_date">End Date:</label>
+      <input type="date" name="end_date" /><br /><br />
+      <label for="plan">Plan:</label>
+      <textarea name="plan" cols="30" rows="10"></textarea><br /><br />
+      <button>Submit</button>
+    </form>
+    <br />
+    <form action="/dashboard" method="POST">
+      {% csrf_token %}
+      <button>Cancel</button>
+    </form>
+  </body>
+</html>

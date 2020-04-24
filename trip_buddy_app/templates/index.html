@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trip Buddy</title>
+  </head>
+  <body>
+    <h1>Welcome! Let's travel!</h1>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <h2>Register</h2>
+    <form action="/registration" method="POST">
+      {% csrf_token %}
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" /> <br />
+      <br />
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" /> <br />
+      <br />
+      <label for="email">Email</label>
+      <input type="text" name="email" /> <br />
+      <br />
+      <label for="password">Password</label>
+      <input type="password" name="password" /> <br />
+      <br />
+      <label for="confirm_pw">Confirm PW</label>
+      <input type="password" name="confirm_pw" /> <br />
+      <br />
+      <button>Register</button>
+    </form>
+    <br />
+    <br />
+    <h1>Log In</h1>
+    <form action="/loggedin" method="POST">
+      {% csrf_token %}
+      <label for="log_email">Email</label>
+      <input type="text" name="log_email" /> <br />
+      <br />
+      <label for="log_pw">Password</label>
+      <input type="password" name="log_pw" /> <br />
+      <br />
+      <button>Log In</button>
+    </form>
+  </body>
+</html>

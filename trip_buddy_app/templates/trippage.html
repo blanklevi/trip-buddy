@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Trip</title>
+  </head>
+  <body>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/logout">Log Out</a>
+    <h1>Hello {{first_name}}! Read about this trip!</h1>
+    <br />
+    <br />
+    <h2>{{trip.destination}}</h2>
+    <p>Start Date: {{trip.start_date}}</p>
+    <p>End Date: {{trip.end_date}}</p>
+    <p>Created On: {{trip.created_at}}</p>
+    <p>Last Updated: {{trip.updated_at}}</p>
+    <p>Created By: {{creator_name}}</p>
+    <br />
+    <br />
+    <h2>People Who've Joined the Trip:</h2>
+    {% for user in creators %} {% if user.id is not creator_id %}
+    <p>{{user.first_name}}</p>
+    {% endif %} {% endfor %}
+  </body>
+</html>

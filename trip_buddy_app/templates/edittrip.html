@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Trip</title>
+  </head>
+  <body>
+    <a href="/logout">Log Out</a>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+        {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Hello {{first_name}}! Let's edit your trip!</h1>
+    <br />
+    <br />
+    <form action="/edit/{{trip.id}}" method="POST">
+      {% csrf_token %}
+      <label for="edit_destination">Destination:</label>
+      <input
+        type="text"
+        name="edit_destination"
+        value="{{trip.destination}}"
+      /><br /><br />
+      <label for="edit_start_date">Start Date:</label>
+      <input
+        type="date"
+        name="edit_start_date"
+        value="{{trip.start_date}}"
+      /><br /><br />
+      <label for="edit_end_date">End Date:</label>
+      <input
+        type="date"
+        name="edit_end_date"
+        value="{{trip.end_date}}"
+      /><br /><br />
+      <label for="edit_plan">Plan:</label>
+      <textarea name="edit_plan" cols="30" rows="10">{{trip.plan}}</textarea
+      ><br /><br />
+      <button>Change</button>
+    </form>
+    <br />
+    <form action="/dashboard" method="POST">
+      {% csrf_token %}
+      <button>Cancel</button>
+    </form>
+  </body>
+</html>
